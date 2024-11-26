@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5iq1odqs3rct"]
+
+[ext_resource type="PackedScene" uid="uid://ye2ycwm03ug8" path="res://MyTinyHouse.blend" id="1_qdxlj"]
+[ext_resource type="PackedScene" uid="uid://qgwf2ila5vpx" path="res://player.tscn" id="2_7cqb5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fuc0s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_41mot"]
+sky_material = SubResource("ProceduralSkyMaterial_fuc0s")
+
+[sub_resource type="Environment" id="Environment_0lob1"]
+background_mode = 2
+sky = SubResource("Sky_41mot")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhftp"]
+albedo_color = Color(0.525334, 0.525334, 0.525334, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cceqr"]
+material = SubResource("StandardMaterial3D_dhftp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nruvp"]
+albedo_color = Color(0.818279, 0.0139178, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_smax0"]
+material = SubResource("StandardMaterial3D_nruvp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8sxk4"]
+albedo_color = Color(0.296949, 0.267356, 0.274579, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ao4jv"]
+material = SubResource("StandardMaterial3D_8sxk4")
+
+[node name="World" type="Node3D"]
+transform = Transform3D(0.999984, 0.0057072, 0, -0.0057072, 0.999984, 0, 0, 0, 1, 2.53846, -1.90735e-06, 0.378412)
+
+[node name="MyWorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0lob1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.904314, 0.426869, 0, -0.426869, 0.904314, 0, 10.5503, 32.3241)
+
+[node name="Erdgeschoss" type="MeshInstance3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 12.7961, 3.01576, 0)
+mesh = SubResource("BoxMesh_cceqr")
+
+[node name="Dach" type="MeshInstance3D" parent="Erdgeschoss"]
+transform = Transform3D(1.215, 0, 0, 0, 0.72, 0, 0, 0, 1.215, 0, 0.763398, 0)
+mesh = SubResource("PrismMesh_smax0")
+
+[node name="MyTinyHouse" parent="." instance=ExtResource("1_qdxlj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7263, 0, 1.36164)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(185.999, 0, 0, 0, -7.51992e-06, 1, 0, -172.036, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_ao4jv")
+
+[node name="Player" parent="." instance=ExtResource("2_7cqb5")]
+transform = Transform3D(0.999976, 0.00698126, 0, -0.00698116, 0.999962, 0.00523596, 3.65536e-05, -0.00523584, 0.999986, -1.44501, 0.166445, 15)
+speed = 10

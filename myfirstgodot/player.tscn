@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://qgwf2ila5vpx"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_uib44"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wljcy"]
+albedo_color = Color(0.67, 0.502947, 0.4422, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o0haw"]
+material = SubResource("StandardMaterial3D_wljcy")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_df6j2"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_uib44")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.245, 0, 0, 0, 2.245, 0, 0, 0, 2.245, 0, 2.03938, 0)
+mesh = SubResource("CapsuleMesh_o0haw")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.46, 0, 0, 0, 0.0102997, -0.459885, 0, 0.459885, 0.0102997, 0, 0.425337, -0.413416)
+mesh = SubResource("CapsuleMesh_df6j2")
